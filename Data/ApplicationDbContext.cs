@@ -14,6 +14,6 @@ namespace Who_Whom_.Data
         {
         }
         public DbSet<Product> Product { get; set; }
-
+        public DbSet<AccountUser> AccountUsers { get; set; }
     }
 }
