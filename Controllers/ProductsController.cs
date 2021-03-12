@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Who_Whom_.Data;
 using Who_Whom_.Models;
+using System.Collections.Generic;
 
 namespace Who_Whom_.Controllers
 {
@@ -22,12 +23,64 @@ namespace Who_Whom_.Controllers
             return View(await _context.Product.ToListAsync());
         }
 
+        public async Task<IActionResult> Who()
+        {
+            //List<Product> products = new List<Product>();
+
+            //var Average = _context.Product.Average(m => m.Price);
+
+            //Product[] Max = _context.Product.Where(m => m.Price > Average).ToArray();
+            //Product[] Min = _context.Product.Where(m => m.Price < Average).ToArray();
+
+            //for (int i = 0; i < Max.Length; i++)
+            //{
+            //    for (int j = 0; j < Min.Length; j++)// паребір по масиву боржників
+            //    {
+            //        int count = 0;
+            //        while (Min[j].Price != Average)
+            //        {
+            //            if (Max[i].Price != Average)
+            //            {
+            //                Max[i].Price -= 1;
+            //                Min[j].Price += 1;
+            //                count++;
+            //            }
+            //            if (Min[j].Price == Average)
+            //            {
+            //                // Console.WriteLine("{0}, в сумі {2} має віддати - {1}", Min[j].Name, Max[i].Name, count);
+            //                //j++;
+            //                products.Add(new Product { Price = count, User = Max[i].User });
+            //            }
+            //            else if (Max[i].Price == Average)
+            //            {
+            //                //Console.WriteLine("{0}, в сумі {2} має віддати - {1}", Min[j].Name, Max[i].Name, count);
+            //                products.Add(new Product { Price = count, User = Max[i].User });
+            //                i++;
+            //                count = 0;
+            //            }
+            //        }
+            //    }
+            //}
+
+            return View(await _context.Product.ToListAsync());
+        }
+
+
+        public async Task<IActionResult>UserList()
+        {
+            
+            return View(await _context.Product.ToListAsync());
+           
+        }
+           
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
 
             var product = await _context.Product
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -38,7 +91,6 @@ namespace Who_Whom_.Controllers
 
             return View(product);
         }
-
 
         public IActionResult Create()
         {
@@ -77,7 +129,7 @@ namespace Who_Whom_.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Name,Price")] Product product)
+        public async Task<IActionResult> Edit(int id,  Product product)
         {
             if (id != product.Id)
             {

@@ -1,0 +1,82 @@
+﻿@using Who_Whom_.Models
+@model IEnumerable<Who_Whom_.Models.Product>
+
+@{
+    ViewData["Title"] = "Who";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Who</h1>
+
+<p>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<d>
+    @{
+        List<Product> products = new List<Product>(Model);
+        var Average = products.Average(m => m.Price);
+        Product[] Max = products.Where(m => m.Price > Average).ToArray();
+        Product[] Min = products.Where(m => m.Price < Average).ToArray();
+
+        for (int i = 0; i < Max.Length; i++)
+        {
+            for (int j = 0; j < Min.Length; j++)
+            {
+                int count = 0;
+                while (Min[j].Price != Average)
+                {
+                    if (Max[i].Price != Average)
+                    {
+                        Max[i].Price -= 1;
+                        Min[j].Price += 1;
+                        count++;
+                    }
+                    if (Min[j].Price == Average)
+                    {
+                        <li>@Min[j].User в сумі "@count"  має віддати @Max[i].User" </li>
+                    }
+                    else if (Max[i].Price == Average)
+                    {
+                        <li>@Min[j].User в сумі @count  має віддати @Max[i].User" </li>
+                        i++;
+                        count = 0;
+                    }
+                }
+            }
+        }
+    }
+</d>

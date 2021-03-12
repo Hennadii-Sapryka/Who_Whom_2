@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Who_Whom_.Models.Product>
+
+@{
+    ViewData["Title"] = "UserList";
+}
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<td>
+    Середня ціна по чеку @Html.ViewData.Model.Average(m => m.Price)
+
+</td>
+<h1>Список користувачів</h1>
