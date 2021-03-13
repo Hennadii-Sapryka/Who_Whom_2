@@ -2,7 +2,7 @@
 @model IEnumerable<Who_Whom_.Models.Product>
 
 @{
-    ViewData["Title"] = "Who";
+    ViewData["Title"] = "Calculation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -44,17 +44,29 @@
         }
     </tbody>
 </table>
+<h3>Загальна сума витрат становить: @Html.ViewData.Model.Sum(m => m.Price) грн.</h3>
+@{
+    try
+    {
+        <h3>Середня ціна по чеку становить: @Html.ViewData.Model.Average(m => m.Price) грн.</h3>
+    }
+    catch
+    {
 
+    }
+}
 <d>
     @{
         List<Product> products = new List<Product>(Model);
 
-        if (products.Count!=0)
+        if (products.FirstOrDefault()!=null)
         {
-            double Average = products.Average(m => m.Price);
+           
+        }
 
-            Product[] Max = products.Where(m => m.Price > Average).ToArray();
-            Product[] Min = products.Where(m => m.Price < Average).ToArray();
+        var Average = products.Average(m => m.Price);
+        Product[] Max = products.Where(m => m.Price > Average).ToArray();
+        Product[] Min = products.Where(m => m.Price < Average).ToArray();
 
             for (int i = 0; i < Max.Length; i++)
             {

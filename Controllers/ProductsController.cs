@@ -23,8 +23,12 @@ namespace Who_Whom_.Controllers
             return View(await _context.Product.ToListAsync());
         }
 
-        public async Task<IActionResult> Who()
+        public async Task<IActionResult> Calculation()
         {
+                if (_context.Product.FirstOrDefault()==null)
+            {
+              return  View("NotFound");
+            }
             //List<Product> products = new List<Product>();
 
             //var Average = _context.Product.Average(m => m.Price);
@@ -65,12 +69,9 @@ namespace Who_Whom_.Controllers
             return View(await _context.Product.ToListAsync());
         }
 
-
         public async Task<IActionResult>UserList()
         {
-            
             return View(await _context.Product.ToListAsync());
-           
         }
            
 
@@ -80,7 +81,6 @@ namespace Who_Whom_.Controllers
             {
                 return NotFound();
             }
-
 
             var product = await _context.Product
                 .FirstOrDefaultAsync(m => m.Id == id);
