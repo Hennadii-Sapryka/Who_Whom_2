@@ -19,16 +19,6 @@ namespace Who_Whom_.Models
         [Display(Name = "Хто купив")]
         public string User { get; set; }
 
-        public AccountUser UsersAccount { get; set; }
 
-    }
-
-    public class AccountUser : IdentityUser
-    {
-
-        public AccountUser()
-        {
-
-        }
     }
 }

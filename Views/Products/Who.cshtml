@@ -48,35 +48,41 @@
 <d>
     @{
         List<Product> products = new List<Product>(Model);
-        var Average = products.Average(m => m.Price);
-        Product[] Max = products.Where(m => m.Price > Average).ToArray();
-        Product[] Min = products.Where(m => m.Price < Average).ToArray();
 
-        for (int i = 0; i < Max.Length; i++)
+        if (products.Count!=0)
         {
-            for (int j = 0; j < Min.Length; j++)
+            double Average = products.Average(m => m.Price);
+
+            Product[] Max = products.Where(m => m.Price > Average).ToArray();
+            Product[] Min = products.Where(m => m.Price < Average).ToArray();
+
+            for (int i = 0; i < Max.Length; i++)
             {
-                int count = 0;
-                while (Min[j].Price != Average)
+                for (int j = 0; j < Min.Length; j++)
                 {
-                    if (Max[i].Price != Average)
+                    int count = 0;
+                    while (Min[j].Price != Average)
                     {
-                        Max[i].Price -= 1;
-                        Min[j].Price += 1;
-                        count++;
-                    }
-                    if (Min[j].Price == Average)
-                    {
+                        if (Max[i].Price != Average)
+                        {
+                            Max[i].Price -= 1;
+                            Min[j].Price += 1;
+                            count++;
+                        }
+                        if (Min[j].Price == Average)
+                        {
                         <li>@Min[j].User в сумі "@count"  має віддати @Max[i].User" </li>
-                    }
-                    else if (Max[i].Price == Average)
-                    {
+                        }
+                        else if (Max[i].Price == Average)
+                        {
                         <li>@Min[j].User в сумі @count  має віддати @Max[i].User" </li>
-                        i++;
-                        count = 0;
+                                i++;
+                                count = 0;
+                            }
+                        }
                     }
                 }
             }
+
         }
-    }
 </d>
