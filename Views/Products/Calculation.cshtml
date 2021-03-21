@@ -61,12 +61,23 @@
 
         if (products.FirstOrDefault()!=null)
         {
-           
         }
+        var Average = products
+            .Sum(m => m.Price)
+            / products
+            .GroupBy(m => m.User)
+            .Count();
 
-        var Average = products.Average(m => m.Price);
-        Product[] Max = products.Where(m => m.Price > Average).ToArray();
-        Product[] Min = products.Where(m => m.Price < Average).ToArray();
+        Product[] max2 = products
+            .GroupBy(m => m.User)
+            .Select(g => new Product { User = g.Key, Price = g.Sum(p => p.Price) }).ToArray();
+
+
+
+       // Product[] Max = products.GroupBy(m => m.User ).ToArray();
+
+        Product[] Max = max2.Where(m => m.Price > Average).ToArray();
+        Product[] Min = max2.Where(m => m.Price < Average).ToArray();
 
             for (int i = 0; i < Max.Length; i++)
             {
