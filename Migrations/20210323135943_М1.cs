@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Who_Whom_.Migrations
 {
-    public partial class v1 : Migration
+    public partial class М1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,9 +52,9 @@ namespace Who_Whom_.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(maxLength: 10, nullable: false),
                     Price = table.Column<int>(nullable: false),
-                    User = table.Column<string>(nullable: false)
+                    User = table.Column<string>(maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {

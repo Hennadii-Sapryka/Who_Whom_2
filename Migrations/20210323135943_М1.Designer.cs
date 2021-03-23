@@ -10,8 +10,8 @@ using Who_Whom_.Data;
 namespace Who_Whom_.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210312214551_v1")]
-    partial class v1
+    [Migration("20210323135943_М1")]
+    partial class М1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -230,14 +230,16 @@ namespace Who_Whom_.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.Property<string>("User")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.HasKey("Id");
 

@@ -4,32 +4,23 @@
     ViewData["Title"] = "UserList";
 }
 
-<table>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User)
-            </td>
-        </tr>
-    }
+<div class="text-center">
+    <h1 class="display-4">Список користувачів</h1>
 
-</table>
+</div>
 
-<td>
-    @{ 
-        try
+<div class="display-4">
+    <table>
+
+        @foreach (var item in Model.GroupBy(m => m.User).Select(g => new Product { User = g.Key, Price = g.Sum(p => p.Price) }))
+
         {
-           @Html.ViewData.Model.Average(m => m.Price)
+            <tr>
+                <td>
+                    @item.User : витратив @item.Price UHA
+                </td>
+            </tr>
         }
-        catch
-        {
-        }
-    }
+    </table>
+</div>
 
-
-</td>
-<h1>Список користувачів</h1>
