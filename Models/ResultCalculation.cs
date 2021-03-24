@@ -12,7 +12,5 @@ namespace Who_Whom_.Models
         public int Money { get; set; }
         public int Average { get; set; }
 
-        public List<Product> Products;
-
     }
 }
